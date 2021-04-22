@@ -18,3 +18,6 @@ class EmployeeForm(forms.ModelForm):
                    'expiration_date': forms.DateInput(attrs={'class': 'form-control'}),
                    }
 
+
+
+#class TaskForm(forms.ModelForm):

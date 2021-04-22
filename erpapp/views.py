@@ -51,3 +51,8 @@ def delete_emp(request, id):
     employee = Employee.objects.get(id=id)
     employee.delete()
     return redirect('/')
+
+
+def tasks(request):
+    return render(request, 'Tasks/tasks.html')
+
