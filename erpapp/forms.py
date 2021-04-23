@@ -5,8 +5,8 @@ from erpapp.models import Employee
 class EmployeeForm(forms.ModelForm):
     class Meta:
         type_choices = [
-            ('UA', 'Undergraduate Assistant'),
-            ('RA', 'Research Assistant')
+            ('Undergraduate Assistant', 'UA'),
+            ('Research Assistant', 'RA')
         ]
         model = Employee
         fields = ['firstname', 'lastname', 'type', 'capacity', 'hiring_date', 'expiration_date']
