@@ -25,5 +25,5 @@ urlpatterns = [
     path('update_emp/<int:id>', views.update_emp),
     path('delete_emp/<int:id>', views.delete_emp),
     path('admin/', admin.site.urls),
-    path('tasks/', views.tasks)
+    path('overview/', views.overview)
 ]

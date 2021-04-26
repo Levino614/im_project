@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from erpapp.forms import EmployeeForm
 from erpapp.models import Employee
+from erpapp.models import Assignment
+from erpapp.models import Project
+from erpapp.models import Chair
+from erpapp.models import Position
+from erpapp.models import Task
 
 
 # Create your views here.
@@ -53,6 +58,45 @@ def delete_emp(request, id):
     return redirect('/')
 
 
-def tasks(request):
-    return render(request, 'Tasks/tasks.html')
+def overview(request):
+    employees = Employee.objects.all()
+    assignments = Assignment.objects.all()
+    projects = Project.objects.all()
+    chairs = Chair.objects.all()
+    positions = Position.objects.all()
+    tasks = Task.objects.all()
+    employeeprojects = []
 
+    for employee in employees:
+        employee_prj_hours = []
+        employee_prj_hours_id = []
+        for project in projects:
+            for assignment in assignments:
+                if assignment.task.id == project.id and assignment.employee.id == employee.id:
+                    employee_prj_hours.append(assignment.percentage)
+                    employee_prj_hours_id.append(project.id)
+        employee_list = []
+        employee_list.append(employee)
+        for project in projects:
+            if project.id in employee_prj_hours_id:
+                employee_list.append(employee_prj_hours[employee_prj_hours_id.index(project.id)])
+            else: employee_list.append(0)
+
+        employeeprojects.append(employee_list)
+    print(employeeprojects)
+
+
+
+
+    context = {
+        'employees': employees,
+        'assignments': assignments,
+        'projects': projects,
+        'chairs': chairs,
+        'positions': positions,
+        'employeeprojects': employeeprojects
+    }
+    print("-----------")
+    for task in tasks:
+        print(str(task) + ", id: " + str(task.id))
+    return render(request, 'Overview/overview.html', context)

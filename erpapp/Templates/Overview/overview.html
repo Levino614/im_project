@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Overview{% endblock title %}
+
+{% block content %}
+<h1>OverView</h1>
+<table width="100%">
+     <tr>
+        <th>Name</th>
+        {% for project in projects %}
+        <th>P{{project.id}}</th>
+        {% endfor %}
+        {% for chair in chairs %}
+        <th>c{{chair.id}}</th>
+        {% endfor %}
+        {% for position in positions %}
+        <th>p{{position.id}}</th>
+        {% endfor %}
+     </tr>
+
+         {% for employeeproject in employeeprojects %}
+            <tr>
+            {% for employeep in employeeproject %}
+                <th>{{employeep}}</th>
+            {% endfor %}
+            </tr>
+         {% endfor %}
+
+
+</table>
+<br>
+<br>
+<br>
+<br>
+{{employeeprojects}}
+{% endblock content %}
